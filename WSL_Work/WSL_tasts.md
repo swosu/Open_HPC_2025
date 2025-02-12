@@ -12,3 +12,7 @@ $ sudo apt install ansible-core
 /evertj$ ansible-galaxy collection install community.general
 ```
 
+
+```console
+$ sudo apt install virtualbox
+```
