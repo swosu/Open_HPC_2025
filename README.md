@@ -23,3 +23,10 @@ Then type powershell and press enter
 then type wsl and press enter.
 
 Then you should get a nice place to work on stuff.
+
+You have to set up a user name and a password.
+
+Best practice is:
+```console
+PS C:\Users\evertj> wsl --set-default Ubuntu
+```

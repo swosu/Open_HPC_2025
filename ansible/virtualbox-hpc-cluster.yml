@@ -1,0 +1,35 @@
+- name: Create VirtualBox VMs for HPC Cluster
+  hosts: localhost
+  tasks:
+    - name: Create management node
+      community.general.virtualbox:
+        name: management-node
+        state: running
+        cpus: 3
+        memory: 8192
+        disk_size: 20G
+        network_interfaces:
+          - type: "hostonly"  # or "bridged" for network PXE
+        boot_order: "network"  # Ensures PXE boot behavior
+
+    - name: Create compute node 1
+      community.general.virtualbox:
+        name: compute-node-1
+        state: running
+        cpus: 2
+        memory: 4096
+        disk_size: 10G
+        network_interfaces:
+          - type: "hostonly"
+        boot_order: "network"
+
+    - name: Create compute node 2
+      community.general.virtualbox:
+        name: compute-node-2
+        state: running
+        cpus: 2
+        memory: 4096
+        disk_size: 10G
+        network_interfaces:
+          - type: "hostonly"
+        boot_order: "network"
