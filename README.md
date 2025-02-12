@@ -18,8 +18,8 @@ wsl --install -d Ubuntu
 and then restart your computer. 
 This is going to give you a linux laptop essentially.
 
-Here is the step that I needed to run on my laptop to make Ansible run
-```console
-C:\Users\evertj\git>wsl --install
-```
+and then you can press Windows + r
+Then type powershell and press enter
+then type wsl and press enter.
 
+Then you should get a nice place to work on stuff.
