@@ -1,0 +1,29 @@
+- name: Create VirtualBox VMs for HPC Cluster using VBoxManage
+  hosts: localhost
+  tasks:
+    - name: Create management node
+      shell: |
+        VBoxManage createvm --name management-node --register
+        VBoxManage modifyvm management-node --cpus 3 --memory 8192 --nic1 hostonly
+        VBoxManage createmedium disk --filename management-node.vdi --size 20480
+        VBoxManage storagectl management-node --name "SATA Controller" --add sata --controller IntelAHCI
+        VBoxManage storageattach management-node --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium management-node.vdi
+        VBoxManage modifyvm management-node --boot1 net
+
+    - name: Create compute node 1
+      shell: |
+        VBoxManage createvm --name compute-node-1 --register
+        VBoxManage modifyvm compute-node-1 --cpus 2 --memory 4096 --nic1 hostonly
+        VBoxManage createmedium disk --filename compute-node-1.vdi --size 10240
+        VBoxManage storagectl compute-node-1 --name "SATA Controller" --add sata --controller IntelAHCI
+        VBoxManage storageattach compute-node-1 --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium compute-node-1.vdi
+        VBoxManage modifyvm compute-node-1 --boot1 net
+
+    - name: Create compute node 2
+      shell: |
+        VBoxManage createvm --name compute-node-2 --register
+        VBoxManage modifyvm compute-node-2 --cpus 2 --memory 4096 --nic1 hostonly
+        VBoxManage createmedium disk --filename compute-node-2.vdi --size 10240
+        VBoxManage storagectl compute-node-2 --name "SATA Controller" --add sata --controller IntelAHCI
+        VBoxManage storageattach compute-node-2 --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium compute-node-2.vdi
+        VBoxManage modifyvm compute-node-2 --boot1 net
